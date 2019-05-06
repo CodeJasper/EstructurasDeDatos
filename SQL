@@ -1,0 +1,202 @@
+CREATE TABLE public.autobus
+(
+    codigo_autobus integer NOT NULL,
+    codigo_centro_estudio integer,
+    codigo_grupo_parada integer,
+    matricula character varying(6) COLLATE pg_catalog."default",
+    num_asientos integer,
+    "nombre_compañia" character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "Autobus_pkey" PRIMARY KEY (codigo_autobus)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.autobus
+    OWNER to postgres;
+
+-- Index: Autobus_FKs
+
+-- DROP INDEX public."Autobus_FKs";
+
+CREATE INDEX "Autobus_FKs"
+    ON public.autobus USING btree
+    (codigo_centro_estudio, codigo_grupo_parada)
+    TABLESPACE pg_default;
+
+CREATE TABLE public.centro_de_estudio
+(
+    codigo_centro_estudio integer NOT NULL,
+    codigo_matricula integer,
+    codigo_grupo_autobuses integer,
+    nombre character varying(50) COLLATE pg_catalog."default",
+    direccion character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "Centro_de_Estudios_pkey" PRIMARY KEY (codigo_centro_estudio)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.centro_de_estudio
+    OWNER to postgres;
+
+-- Index: Centro_de_Estudios_FKs
+
+-- DROP INDEX public."Centro_de_Estudios_FKs";
+
+CREATE INDEX "Centro_de_Estudios_FKs"
+    ON public.centro_de_estudio USING btree
+    (codigo_matricula, codigo_grupo_autobuses)
+    TABLESPACE pg_default;
+
+CREATE TABLE public.estudiante
+(
+    codigo_matricula integer,
+    codigo_estudiante integer NOT NULL,
+    suscripcion_autobuses integer,
+    programa integer,
+    nombre character varying(50) COLLATE pg_catalog."default",
+    direccion character varying(50) COLLATE pg_catalog."default",
+    apellido character varying COLLATE pg_catalog."default",
+    CONSTRAINT "Estudiante_pkey" PRIMARY KEY (codigo_estudiante)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.estudiante
+    OWNER to postgres;
+
+-- Index: Estudiante_FKs
+
+-- DROP INDEX public."Estudiante_FKs";
+
+CREATE INDEX "Estudiante_FKs"
+    ON public.estudiante USING btree
+    (codigo_matricula, suscripcion_autobuses, programa)
+    TABLESPACE pg_default;
+
+CREATE TABLE public.grupo_autobuses
+(
+    codigo_centro_estudio integer NOT NULL,
+    codigo_autobus integer NOT NULL,
+    CONSTRAINT grupo_autobuses_pkey PRIMARY KEY (codigo_centro_estudio, codigo_autobus)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.grupo_autobuses
+    OWNER to postgres;
+
+-- Index: Grupo_Autobuses_FKs
+
+-- DROP INDEX public."Grupo_Autobuses_FKs";
+
+CREATE INDEX "Grupo_Autobuses_FKs"
+    ON public.grupo_autobuses USING btree
+    (codigo_centro_estudio, codigo_autobus)
+    TABLESPACE pg_default;
+
+CREATE TABLE public.grupo_paradas
+(
+    codigo_parada integer NOT NULL,
+    codigo_autobus integer NOT NULL,
+    CONSTRAINT "primaryKey" PRIMARY KEY (codigo_parada, codigo_autobus)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.grupo_paradas
+    OWNER to postgres;
+
+-- Index: Grupo_Paradas_FKs
+
+-- DROP INDEX public."Grupo_Paradas_FKs";
+
+CREATE INDEX "Grupo_Paradas_FKs"
+    ON public.grupo_paradas USING btree
+    (codigo_parada, codigo_autobus)
+    TABLESPACE pg_default;
+
+CREATE TABLE public.matricula
+(
+    codigo_centro_estudio integer NOT NULL,
+    codigo_estudiante integer NOT NULL,
+    CONSTRAINT matricula_pkey PRIMARY KEY (codigo_centro_estudio, codigo_estudiante)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.matricula
+    OWNER to postgres;
+
+-- Index: Matricula_FKs
+
+-- DROP INDEX public."Matricula_FKs";
+
+CREATE INDEX "Matricula_FKs"
+    ON public.matricula USING btree
+    (codigo_centro_estudio, codigo_estudiante)
+    TABLESPACE pg_default;
+
+CREATE TABLE public.parada
+(
+    codigo_parada integer NOT NULL,
+    calle character varying(50) COLLATE pg_catalog."default",
+    CONSTRAINT "Parada_pkey" PRIMARY KEY (codigo_parada)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.parada
+    OWNER to postgres;
+
+CREATE TABLE public.programa
+(
+    codigo_programa integer NOT NULL,
+    nombre_programa character varying(50) COLLATE pg_catalog."default",
+    numero_creditos integer,
+    CONSTRAINT "Programa_pkey" PRIMARY KEY (codigo_programa)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.programa
+    OWNER to postgres;
+
+CREATE TABLE public.suscripcion_autobuses
+(
+    codigo_estudiante integer NOT NULL,
+    codigo_centro_estudio integer NOT NULL,
+    codigo_autobus integer NOT NULL,
+    CONSTRAINT suscripcion_autobuses_pkey PRIMARY KEY (codigo_estudiante, codigo_centro_estudio, codigo_autobus)
+)
+WITH (
+    OIDS = FALSE
+)
+TABLESPACE pg_default;
+
+ALTER TABLE public.suscripcion_autobuses
+    OWNER to postgres;
+
+-- Index: Suscripcion_Autobuses_FKs
+
+-- DROP INDEX public."Suscripcion_Autobuses_FKs";
+
+CREATE INDEX "Suscripcion_Autobuses_FKs"
+    ON public.suscripcion_autobuses USING btree
+    (codigo_estudiante, codigo_centro_estudio, codigo_autobus)
+    TABLESPACE pg_default;

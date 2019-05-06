@@ -1,7 +1,5 @@
 package genericity;
 
-
-
 import stack.StackArray;
 import java.lang.reflect.Method;
 import java.sql.ResultSet;

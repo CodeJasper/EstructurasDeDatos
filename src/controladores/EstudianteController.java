@@ -15,9 +15,9 @@ public class EstudianteController
 		this.dao = new EstudianteDAO();		
 	}
 	
-	public void createDto(int codigo_matricula, int codigo_estudiante, int suscripcion_autobuses, int programa, String nombre, String apellido, String direccion)
+	public void createDto(int codigo_estudiante, int programa, String nombre, String apellido, String direccion)
 	{
-		dto = new EstudianteDTO(codigo_matricula, codigo_estudiante, suscripcion_autobuses, programa, nombre, apellido, direccion);
+		dto = new EstudianteDTO( codigo_estudiante, programa, nombre, apellido, direccion);
 	}
 	
 	public void createDtoId(int codigo_estudiante)	

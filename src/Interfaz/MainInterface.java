@@ -292,19 +292,18 @@ public class MainInterface extends JFrame implements ActionListener {
 			currentTable = AUTOBUS;
 			label1.setText("Id autobus:");
 			label2.setText("Id centro de estudio:");
-			label3.setText("Id grupo paradas:");
-			label4.setText("Matricula:");
-			label5.setText("numero de asientos:");
-			label6.setText("Nombre compa�oa:");
+			label3.setText("Matricula:");
+			label4.setText("Numero de asientos:");
+			label5.setText("Nombre compañia:");		
 			label3.setVisible(true);
 			label4.setVisible(true);
 			label5.setVisible(true);				
-			label6.setVisible(true);
+			label6.setVisible(false);
 			label7.setVisible(false);
 			textField3.setVisible(true);
 			textField4.setVisible(true);
 			textField5.setVisible(true);
-			textField6.setVisible(true);
+			textField6.setVisible(false);
 			textField7.setVisible(false);
 			textField1.setText("");
 			textField2.setText("");
@@ -317,7 +316,7 @@ public class MainInterface extends JFrame implements ActionListener {
 				new Object[][] {
 				},
 				new String[] {
-					"Codigo autobus", "Codigo centro de estudio", "Codigo grupo parada", "Matricula", "Numero de asientos", "Compa\u00F1ia"
+					"Id autobus", "Id centro de estudio", "Matricula", "Numero de asientos", "Compañia"
 				}
 			));
 			dataTable.getColumnModel().getColumn(0).setPreferredWidth(90);
@@ -332,9 +331,46 @@ public class MainInterface extends JFrame implements ActionListener {
 			coverPanel.setVisible(false);
 			currentTable = CENTRO_DE_ESTUDIO;
 			label1.setText("Id Centro de estudio:");
-			label2.setText("Id Matricula:");
-			label3.setText("Id Grupo autobuses:");
-			label4.setText("Nombre:");
+			label2.setText("Nombre:");
+			label3.setText("Direccion:");			
+			label3.setVisible(true);
+			label4.setVisible(false);
+			label5.setVisible(false);				
+			label6.setVisible(false);
+			label7.setVisible(false);
+			textField3.setVisible(true);
+			textField4.setVisible(false);
+			textField5.setVisible(false);
+			textField6.setVisible(false);
+			textField7.setVisible(false);
+			textField1.setText("");
+			textField2.setText("");
+			textField3.setText("");
+			textField4.setText("");
+			textField5.setText("");
+			textField6.setText("");
+			textField7.setText("");			
+			dataTable.setModel(new DefaultTableModel(
+					new Object[][] {
+					},
+					new String[] {
+						"Codigo centro de estudio",  "Nombre", "Direccion"
+					}
+				));
+				dataTable.getColumnModel().getColumn(0).setPreferredWidth(110);
+				dataTable.getColumnModel().getColumn(1).setPreferredWidth(128);
+				dataTable.getColumnModel().getColumn(2).setPreferredWidth(123);
+				dataTable.getColumnModel().getColumn(3).setPreferredWidth(61);
+				dataTable.getColumnModel().getColumn(4).setPreferredWidth(110);
+				scrollPane.setViewportView(dataTable);
+		}
+		else if( event.getSource() == estudianteButton ) {
+			coverPanel.setVisible(false);
+			currentTable = ESTUDIANTE;	
+			label1.setText("Id Estudiante:");			
+			label2.setText("Id Programa:");
+			label3.setText("Nombre:");
+			label4.setText("Apellido:");
 			label5.setText("Direccion:");
 			label3.setVisible(true);
 			label4.setVisible(true);
@@ -357,48 +393,7 @@ public class MainInterface extends JFrame implements ActionListener {
 					new Object[][] {
 					},
 					new String[] {
-						"Codigo centro de estudio", "Codigo de matricula", "Codigo grupo de autobuses", "Nombre", "Direccion"
-					}
-				));
-				dataTable.getColumnModel().getColumn(0).setPreferredWidth(110);
-				dataTable.getColumnModel().getColumn(1).setPreferredWidth(128);
-				dataTable.getColumnModel().getColumn(2).setPreferredWidth(123);
-				dataTable.getColumnModel().getColumn(3).setPreferredWidth(61);
-				dataTable.getColumnModel().getColumn(4).setPreferredWidth(110);
-				scrollPane.setViewportView(dataTable);
-		}
-		else if( event.getSource() == estudianteButton ) {
-			coverPanel.setVisible(false);
-			currentTable = ESTUDIANTE;
-			label1.setText("Id Matricula:");
-			label2.setText("Id Estudiante:");
-			label3.setText("Id Suscripcion autobuses:");
-			label4.setText("Id Programa:");
-			label5.setText("Nombre:");
-			label6.setText("Apellido:");
-			label7.setText("Direccion:");
-			label3.setVisible(true);
-			label4.setVisible(true);
-			label5.setVisible(true);				
-			label6.setVisible(true);
-			label7.setVisible(true);
-			textField3.setVisible(true);
-			textField4.setVisible(true);
-			textField5.setVisible(true);
-			textField6.setVisible(true);
-			textField7.setVisible(true);
-			textField1.setText("");
-			textField2.setText("");
-			textField3.setText("");
-			textField4.setText("");
-			textField5.setText("");
-			textField6.setText("");
-			textField7.setText("");			
-			dataTable.setModel(new DefaultTableModel(
-					new Object[][] {
-					},
-					new String[] {
-						"Codigo de matricula", "Codigo estudiante", "Suscripcion autobuses", "Programa", "Nombre", "Apellido", "Direccion" 
+						"Codigo estudiante", "Programa", "Nombre", "Apellido", "Direccion" 
 					}
 				));
 				dataTable.getColumnModel().getColumn(0).setPreferredWidth(110);
@@ -514,7 +509,7 @@ public class MainInterface extends JFrame implements ActionListener {
 			coverPanel.setVisible(false);
 			currentTable = PARADA;			
 			label1.setText("Id Parada:");
-			label2.setText("Calle:");				
+			label2.setText("Direccion:");				
 			label3.setVisible(false);
 			label4.setVisible(false);
 			label5.setVisible(false);				
@@ -622,19 +617,19 @@ public class MainInterface extends JFrame implements ActionListener {
 				if(currentTable==AUTOBUS)
 				{
 					autobusController = new AutobusController();
-					autobusController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), Integer.parseInt(textField3.getText()), textField4.getText(), Integer.parseInt(textField5.getText()), textField6.getText());
+					autobusController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), textField3.getText(), Integer.parseInt(textField4.getText()), textField5.getText());
 					autobusController.insert();
 				}
 				else if(currentTable == CENTRO_DE_ESTUDIO)
 				{
 					centroEstudioController = new CentroEstudioController();
-					centroEstudioController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), Integer.parseInt(textField3.getText()), textField4.getText(), textField5.getText());
+					centroEstudioController.createDto(Integer.parseInt(textField1.getText()), textField2.getText(), textField3.getText());
 					centroEstudioController.insert();
 				}
 				else if(currentTable == ESTUDIANTE)
 				{
 					estudianteController = new EstudianteController();
-					estudianteController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()), textField5.getText(), textField6.getText(), textField7.getText());
+					estudianteController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), textField3.getText(), textField4.getText(), textField5.getText());
 					estudianteController.insert();
 				}
 				else if(currentTable == GRUPO_AUTOBUSES)
@@ -763,19 +758,19 @@ public class MainInterface extends JFrame implements ActionListener {
 				if(currentTable==AUTOBUS)
 				{
 					autobusController = new AutobusController();
-					autobusController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), Integer.parseInt(textField3.getText()), textField4.getText(), Integer.parseInt(textField5.getText()), textField6.getText());
+					autobusController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), textField3.getText(), Integer.parseInt(textField4.getText()), textField5.getText());
 					autobusController.update();
 				}
 				else if(currentTable == CENTRO_DE_ESTUDIO)
 				{
 					centroEstudioController = new CentroEstudioController();
-					centroEstudioController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), Integer.parseInt(textField3.getText()), textField4.getText(),textField5.getText());
+					centroEstudioController.createDto(Integer.parseInt(textField1.getText()), textField2.getText(), textField3.getText());
 					centroEstudioController.update();
 				}
 				else if(currentTable == ESTUDIANTE)
 				{
 					estudianteController = new EstudianteController();
-					estudianteController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), Integer.parseInt(textField3.getText()), Integer.parseInt(textField4.getText()),textField5.getText(),textField6.getText(),textField7.getText());
+					estudianteController.createDto(Integer.parseInt(textField1.getText()), Integer.parseInt(textField2.getText()), textField3.getText(), textField4.getText(), textField5.getText());
 					estudianteController.update();
 				}
 				else if(currentTable == GRUPO_AUTOBUSES)
@@ -846,10 +841,9 @@ public class MainInterface extends JFrame implements ActionListener {
 						
 						fila[0] = autobusController.getDto().get_codigo_autobus();
 						fila[1] = autobusController.getDto().get_codigo_centro_estudio();
-						fila[2] = autobusController.getDto().get_codigo_grupo_parada();
-						fila[3] = autobusController.getDto().get_matricula();
-						fila[4] = autobusController.getDto().get_num_asientos();
-						fila[5] = autobusController.getDto().get_nombre_compañia();
+						fila[2] = autobusController.getDto().get_matricula();
+						fila[3] = autobusController.getDto().get_num_asientos();
+						fila[4] = autobusController.getDto().get_nombre_compañia();
 						( (DefaultTableModel) dataTable.getModel()).addRow(fila);
 						
 					}
@@ -882,10 +876,8 @@ public class MainInterface extends JFrame implements ActionListener {
 						Object[] fila = new Object[numCols];
 						
 						fila[0] = centroEstudioController.getDto().get_codigo_centro_estudio();
-						fila[1] = centroEstudioController.getDto().get_codigo_matricula();
-						fila[2] = centroEstudioController.getDto().get_codigo_grupo_autobuses();
-						fila[3] = centroEstudioController.getDto().get_nombre();
-						fila[4] = centroEstudioController.getDto().get_direccion();						
+						fila[1] = centroEstudioController.getDto().get_nombre();
+						fila[2] = centroEstudioController.getDto().get_direccion();						
 						( (DefaultTableModel) dataTable.getModel()).addRow(fila);
 						
 					}
@@ -916,13 +908,11 @@ public class MainInterface extends JFrame implements ActionListener {
 						int numCols =  dataTable.getModel().getColumnCount();
 						Object[] fila = new Object[numCols];
 						
-						fila[0] = estudianteController.getDto().get_codigo_matricula();
-						fila[1] = estudianteController.getDto().get_codigo_estudiante();
-						fila[2] = estudianteController.getDto().get_suscripcion_autobuses();
-						fila[3] = estudianteController.getDto().get_programa();
-						fila[4] = estudianteController.getDto().get_nombre();
-						fila[5] = estudianteController.getDto().get_apellido();
-						fila[6] = estudianteController.getDto().get_direccion();
+						fila[0] = estudianteController.getDto().get_codigo_estudiante();
+						fila[1] = estudianteController.getDto().get_programa();
+						fila[2] = estudianteController.getDto().get_nombre();
+						fila[3] = estudianteController.getDto().get_apellido();
+						fila[4] = estudianteController.getDto().get_direccion();
 						( (DefaultTableModel) dataTable.getModel()).addRow(fila);
 						
 					}
@@ -1140,10 +1130,9 @@ public class MainInterface extends JFrame implements ActionListener {
 				autobusController.setDto((AutobusDTO) autobusController.findById());
 				textField1.setText(""+autobusController.getDto().get_codigo_autobus());
 				textField2.setText(""+autobusController.getDto().get_codigo_centro_estudio());
-				textField3.setText(""+autobusController.getDto().get_codigo_grupo_parada());
-				textField4.setText(""+autobusController.getDto().get_matricula());
-				textField5.setText(""+autobusController.getDto().get_num_asientos());
-				textField6.setText(""+autobusController.getDto().get_nombre_compañia());
+				textField3.setText(""+autobusController.getDto().get_matricula());
+				textField4.setText(""+autobusController.getDto().get_num_asientos());
+				textField5.setText(""+autobusController.getDto().get_nombre_compañia());
 			}	
 			else if(currentTable == CENTRO_DE_ESTUDIO)
 			{
@@ -1152,10 +1141,8 @@ public class MainInterface extends JFrame implements ActionListener {
 				centroEstudioController.createDtoId(id);					
 				centroEstudioController.setDto((CentroDeEstudioDTO) centroEstudioController.findById());
 				textField1.setText(""+centroEstudioController.getDto().get_codigo_centro_estudio());
-				textField2.setText(""+centroEstudioController.getDto().get_codigo_matricula());
-				textField3.setText(""+centroEstudioController.getDto().get_codigo_grupo_autobuses());
-				textField4.setText(""+centroEstudioController.getDto().get_nombre());
-				textField5.setText(""+centroEstudioController.getDto().get_direccion());					
+				textField2.setText(""+centroEstudioController.getDto().get_nombre());
+				textField3.setText(""+centroEstudioController.getDto().get_direccion());					
 			}
 			else if(currentTable == ESTUDIANTE)
 			{
@@ -1163,13 +1150,11 @@ public class MainInterface extends JFrame implements ActionListener {
 				estudianteController = new EstudianteController();
 				estudianteController.createDtoId(id);					
 				estudianteController.setDto((EstudianteDTO) estudianteController.findById());
-				textField1.setText(""+estudianteController.getDto().get_codigo_matricula());
-				textField2.setText(""+estudianteController.getDto().get_codigo_estudiante());
-				textField3.setText(""+estudianteController.getDto().get_suscripcion_autobuses());
-				textField4.setText(""+estudianteController.getDto().get_programa());
-				textField5.setText(""+estudianteController.getDto().get_nombre());
-				textField7.setText(""+estudianteController.getDto().get_direccion());
-				textField6.setText(""+estudianteController.getDto().get_apellido());
+				textField1.setText(""+estudianteController.getDto().get_codigo_estudiante());
+				textField2.setText(""+estudianteController.getDto().get_programa());
+				textField3.setText(""+estudianteController.getDto().get_nombre());
+				textField4.setText(""+estudianteController.getDto().get_direccion());
+				textField5.setText(""+estudianteController.getDto().get_apellido());
 			}
 			else if(currentTable == GRUPO_AUTOBUSES)
 			{

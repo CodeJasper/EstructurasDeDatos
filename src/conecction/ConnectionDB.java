@@ -76,7 +76,7 @@ public class ConnectionDB
 		} 
 		catch (SQLException e) 
 		{ 			
-			JOptionPane.showMessageDialog(null, e.getMessage());
+			JOptionPane.showMessageDialog(null,"Hubo un error, por favor verifique que los campos sean correctos\n"  + e.getMessage());
 		}
 		return ex;
 	}

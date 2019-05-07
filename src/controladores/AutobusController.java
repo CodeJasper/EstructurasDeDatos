@@ -13,9 +13,9 @@ public class AutobusController
 		this.dao = new AutobusDAO();				
 	}
 
-	public void createDto(int codigoAutobus, int codigoCentroEstudio, int codigoGrupoParada, String matricula, int numAsientos, String nombreCompañia)	
+	public void createDto(int codigoAutobus, int codigoCentroEstudio, String matricula, int numAsientos, String nombreCompañia)	
 	{
-		dto = new AutobusDTO(codigoAutobus, codigoCentroEstudio, codigoGrupoParada, matricula, numAsientos, nombreCompañia);
+		dto = new AutobusDTO(codigoAutobus,codigoCentroEstudio, matricula, numAsientos, nombreCompañia);
 	}
 	
 	public void createDtoId(int codigoAutobus)	

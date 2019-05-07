@@ -1,12 +1,16 @@
+
 CREATE TABLE public.autobus
 (
     codigo_autobus integer NOT NULL,
     codigo_centro_estudio integer,
-    codigo_grupo_parada integer,
     matricula character varying(6) COLLATE pg_catalog."default",
     num_asientos integer,
     "nombre_compañia" character varying(50) COLLATE pg_catalog."default",
-    CONSTRAINT "Autobus_pkey" PRIMARY KEY (codigo_autobus)
+    CONSTRAINT "Autobus_pkey" PRIMARY KEY (codigo_autobus),
+    CONSTRAINT codigo_centro_estudio_fk FOREIGN KEY (codigo_centro_estudio)
+        REFERENCES public.centro_de_estudio (codigo_centro_estudio) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE
@@ -16,20 +20,9 @@ TABLESPACE pg_default;
 ALTER TABLE public.autobus
     OWNER to postgres;
 
--- Index: Autobus_FKs
-
--- DROP INDEX public."Autobus_FKs";
-
-CREATE INDEX "Autobus_FKs"
-    ON public.autobus USING btree
-    (codigo_centro_estudio, codigo_grupo_parada)
-    TABLESPACE pg_default;
-
 CREATE TABLE public.centro_de_estudio
 (
     codigo_centro_estudio integer NOT NULL,
-    codigo_matricula integer,
-    codigo_grupo_autobuses integer,
     nombre character varying(50) COLLATE pg_catalog."default",
     direccion character varying(50) COLLATE pg_catalog."default",
     CONSTRAINT "Centro_de_Estudios_pkey" PRIMARY KEY (codigo_centro_estudio)
@@ -42,20 +35,10 @@ TABLESPACE pg_default;
 ALTER TABLE public.centro_de_estudio
     OWNER to postgres;
 
--- Index: Centro_de_Estudios_FKs
-
--- DROP INDEX public."Centro_de_Estudios_FKs";
-
-CREATE INDEX "Centro_de_Estudios_FKs"
-    ON public.centro_de_estudio USING btree
-    (codigo_matricula, codigo_grupo_autobuses)
-    TABLESPACE pg_default;
 
 CREATE TABLE public.estudiante
 (
-    codigo_matricula integer,
     codigo_estudiante integer NOT NULL,
-    suscripcion_autobuses integer,
     programa integer,
     nombre character varying(50) COLLATE pg_catalog."default",
     direccion character varying(50) COLLATE pg_catalog."default",
@@ -70,20 +53,20 @@ TABLESPACE pg_default;
 ALTER TABLE public.estudiante
     OWNER to postgres;
 
--- Index: Estudiante_FKs
-
--- DROP INDEX public."Estudiante_FKs";
-
-CREATE INDEX "Estudiante_FKs"
-    ON public.estudiante USING btree
-    (codigo_matricula, suscripcion_autobuses, programa)
-    TABLESPACE pg_default;
 
 CREATE TABLE public.grupo_autobuses
 (
     codigo_centro_estudio integer NOT NULL,
     codigo_autobus integer NOT NULL,
-    CONSTRAINT grupo_autobuses_pkey PRIMARY KEY (codigo_centro_estudio, codigo_autobus)
+    CONSTRAINT grupo_autobuses_pk PRIMARY KEY (codigo_centro_estudio, codigo_autobus),
+    CONSTRAINT codigo_autobus_fk FOREIGN KEY (codigo_autobus)
+        REFERENCES public.autobus (codigo_autobus) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT codigo_centro_estudio_fk FOREIGN KEY (codigo_centro_estudio)
+        REFERENCES public.centro_de_estudio (codigo_centro_estudio) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE
@@ -104,9 +87,17 @@ CREATE INDEX "Grupo_Autobuses_FKs"
 
 CREATE TABLE public.grupo_paradas
 (
-    codigo_parada integer NOT NULL,
     codigo_autobus integer NOT NULL,
-    CONSTRAINT "primaryKey" PRIMARY KEY (codigo_parada, codigo_autobus)
+    codigo_parada integer NOT NULL,
+    CONSTRAINT grupo_paradas_pk PRIMARY KEY (codigo_autobus, codigo_parada),
+    CONSTRAINT codigo_autobus_fk FOREIGN KEY (codigo_autobus)
+        REFERENCES public.autobus (codigo_autobus) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT codigo_parada_fk FOREIGN KEY (codigo_parada)
+        REFERENCES public.parada (codigo_parada) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE
@@ -116,20 +107,19 @@ TABLESPACE pg_default;
 ALTER TABLE public.grupo_paradas
     OWNER to postgres;
 
--- Index: Grupo_Paradas_FKs
-
--- DROP INDEX public."Grupo_Paradas_FKs";
-
-CREATE INDEX "Grupo_Paradas_FKs"
-    ON public.grupo_paradas USING btree
-    (codigo_parada, codigo_autobus)
-    TABLESPACE pg_default;
 
 CREATE TABLE public.matricula
 (
     codigo_centro_estudio integer NOT NULL,
     codigo_estudiante integer NOT NULL,
-    CONSTRAINT matricula_pkey PRIMARY KEY (codigo_centro_estudio, codigo_estudiante)
+    CONSTRAINT codigo_centro_estudio_fk FOREIGN KEY (codigo_centro_estudio)
+        REFERENCES public.centro_de_estudio (codigo_centro_estudio) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT codigo_estudiante_fk FOREIGN KEY (codigo_estudiante)
+        REFERENCES public.estudiante (codigo_estudiante) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE
@@ -148,10 +138,11 @@ CREATE INDEX "Matricula_FKs"
     (codigo_centro_estudio, codigo_estudiante)
     TABLESPACE pg_default;
 
+
 CREATE TABLE public.parada
 (
     codigo_parada integer NOT NULL,
-    calle character varying(50) COLLATE pg_catalog."default",
+    direccion character varying(50) COLLATE pg_catalog."default",
     CONSTRAINT "Parada_pkey" PRIMARY KEY (codigo_parada)
 )
 WITH (
@@ -182,7 +173,18 @@ CREATE TABLE public.suscripcion_autobuses
     codigo_estudiante integer NOT NULL,
     codigo_centro_estudio integer NOT NULL,
     codigo_autobus integer NOT NULL,
-    CONSTRAINT suscripcion_autobuses_pkey PRIMARY KEY (codigo_estudiante, codigo_centro_estudio, codigo_autobus)
+    CONSTRAINT codigo_autobus_fk FOREIGN KEY (codigo_autobus)
+        REFERENCES public.autobus (codigo_autobus) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT codigo_centro_estudio_fk FOREIGN KEY (codigo_centro_estudio)
+        REFERENCES public.centro_de_estudio (codigo_centro_estudio) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION,
+    CONSTRAINT codigo_estudiante_fk FOREIGN KEY (codigo_estudiante)
+        REFERENCES public.estudiante (codigo_estudiante) MATCH SIMPLE
+        ON UPDATE NO ACTION
+        ON DELETE NO ACTION
 )
 WITH (
     OIDS = FALSE

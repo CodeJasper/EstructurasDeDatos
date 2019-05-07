@@ -5,8 +5,7 @@ import interfaces.*;
 public class AutobusDTO implements Crud
 {
 	private int codigo_autobus;
-	private int codigo_centro_estudio;
-	private int codigo_grupo_parada;
+	private int codigo_centro_estudio;	
 	private String matricula;
 	private int num_asientos;
 	private String nombre_compañia;
@@ -16,12 +15,11 @@ public class AutobusDTO implements Crud
 		
 	}
 		
-	public AutobusDTO(int codigoAutobus, int codigoCentroEstudio, int codigoGrupoParada, String matricula,
+	public AutobusDTO(int codigoAutobus, int codigoCentroEstudio, String matricula,
 			int numAsientos, String nombreCompañia) {
 		super();
 		this.codigo_autobus = codigoAutobus;
-		this.codigo_centro_estudio = codigoCentroEstudio;
-		this.codigo_grupo_parada = codigoGrupoParada;
+		this.codigo_centro_estudio = codigoCentroEstudio;		
 		this.matricula = matricula;
 		this.num_asientos = numAsientos;
 		this.nombre_compañia = nombreCompañia;
@@ -47,14 +45,6 @@ public class AutobusDTO implements Crud
 
 	public void set_codigo_centro_estudio(int codigoCentroEstudio) {
 		this.codigo_centro_estudio = codigoCentroEstudio;
-	}
-
-	public int get_codigo_grupo_parada() {
-		return codigo_grupo_parada;
-	}
-
-	public void set_codigo_grupo_parada(int codigoGrupoParada) {
-		this.codigo_grupo_parada = codigoGrupoParada;
 	}
 
 	public String get_matricula() {
@@ -83,8 +73,8 @@ public class AutobusDTO implements Crud
 
 	@Override
 	public String insert() {
-		return "INSERT INTO Autobus(codigo_autobus, codigo_centro_estudio, codigo_grupo_parada, matricula, num_asientos, nombre_compañia) "
-				+ "VALUES ('"+codigo_autobus+"','"+codigo_centro_estudio+"', '"+codigo_grupo_parada+"', '"+matricula.trim()+"', '"+num_asientos+"', '"+nombre_compañia.trim()+"');";	
+		return "INSERT INTO Autobus(codigo_autobus, codigo_centro_estudio, matricula, num_asientos, nombre_compañia) "
+				+ "VALUES ('"+codigo_autobus+"','"+codigo_centro_estudio+"',  '"+matricula.trim()+"', '"+num_asientos+"', '"+nombre_compañia.trim()+"');";	
 	}
 
 	@Override
@@ -111,7 +101,7 @@ public class AutobusDTO implements Crud
 	@Override
 	public String toString() {
 		return "AutobusDTO [codigoAutobus=" + codigo_autobus + ", codigoCentroEstudio=" + codigo_centro_estudio
-				+ ", codigoGrupoParada=" + codigo_grupo_parada + ", matricula=" + matricula + ", numAsientos="
+				+  ", matricula=" + matricula + ", numAsientos="
 				+ num_asientos + ", nombreCompañia=" + nombre_compañia + "]";
 	}
 

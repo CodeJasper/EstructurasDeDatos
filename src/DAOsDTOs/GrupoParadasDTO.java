@@ -7,8 +7,6 @@ public class GrupoParadasDTO implements Crud{
 	private int codigo_parada;
 	private int codigo_autobus;
 	
-	
-
 	public GrupoParadasDTO() {
 
 	}

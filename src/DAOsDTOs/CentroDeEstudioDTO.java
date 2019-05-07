@@ -4,9 +4,7 @@ import interfaces.Crud;
 
 public class CentroDeEstudioDTO implements Crud{
 	
-	private int codigo_centro_estudio;
-	private int codigo_matricula;
-	private int codigo_grupo_autobuses;
+	private int codigo_centro_estudio;	
 	private String nombre;
 	private String direccion;
 	
@@ -14,12 +12,10 @@ public class CentroDeEstudioDTO implements Crud{
 	
 	}
 
-	public CentroDeEstudioDTO(int codigoCentroEstudio, int codigoMatricula, int codigoGrupoAutobuses, String nombre,
+	public CentroDeEstudioDTO(int codigoCentroEstudio,  String nombre,
 			String direccion) {
 		super();
-		this.codigo_centro_estudio = codigoCentroEstudio;
-		this.codigo_matricula = codigoMatricula;
-		this.codigo_grupo_autobuses = codigoGrupoAutobuses;
+		this.codigo_centro_estudio = codigoCentroEstudio;		
 		this.nombre = nombre;
 		this.direccion = direccion;
 	}
@@ -37,22 +33,6 @@ public class CentroDeEstudioDTO implements Crud{
 
 	public void set_codigo_centro_estudio(int codigoCentroEstudio) {
 		this.codigo_centro_estudio = codigoCentroEstudio;
-	}
-
-	public int get_codigo_matricula() {
-		return codigo_matricula;
-	}
-
-	public void set_codigo_matricula(int codigoMatricula) {
-		this.codigo_matricula = codigoMatricula;
-	}
-
-	public int get_codigo_grupo_autobuses() {
-		return codigo_grupo_autobuses;
-	}
-
-	public void set_codigo_grupo_autobuses(int codigoGrupoAutobuses) {
-		this.codigo_grupo_autobuses = codigoGrupoAutobuses;
 	}
 
 	public String get_nombre() {
@@ -73,13 +53,13 @@ public class CentroDeEstudioDTO implements Crud{
 
 	@Override
 	public String insert() {
-		return "INSERT INTO centro_de_estudio(codigo_centro_estudio, codigo_matricula, codigo_grupo_autobuses, nombre, direccion) "
-				+ "VALUES ('"+codigo_centro_estudio+"','"+codigo_matricula+"', '"+codigo_grupo_autobuses+"', '"+nombre.trim()+"', '"+direccion.trim()+"');";
+		return "INSERT INTO centro_de_estudio(codigo_centro_estudio,nombre, direccion) "
+				+ "VALUES ('"+codigo_centro_estudio+"','"+nombre.trim()+"', '"+direccion.trim()+"');";
 	}
 
 	@Override
 	public String update() {
-		return "UPDATE centro_de_estudio set codigo_matricula = '"+codigo_matricula+"', codigo_grupo_autobuses = '"+codigo_grupo_autobuses+"', nombre = '"+nombre.trim()+"', direccion = '"+direccion.trim()+"' where codigo_centro_estudio = '"+codigo_centro_estudio+"';";
+		return "UPDATE centro_de_estudio set nombre = '"+nombre.trim()+"', direccion = '"+direccion.trim()+"' where codigo_centro_estudio = '"+codigo_centro_estudio+"';";
 	}
 
 	@Override
@@ -99,8 +79,8 @@ public class CentroDeEstudioDTO implements Crud{
 
 	@Override
 	public String toString() {
-		return "CentroDeEstudioDTO [codigoCentroEstudio=" + codigo_centro_estudio + ", codigoMatricula=" + codigo_matricula
-				+ ", codigoGrupoAutobuses=" + codigo_grupo_autobuses + ", nombre=" + nombre + ", direccion=" + direccion
+		return "CentroDeEstudioDTO [codigoCentroEstudio=" + codigo_centro_estudio 
+				+ ", nombre=" + nombre + ", direccion=" + direccion
 				+ "]";
 	}
 	

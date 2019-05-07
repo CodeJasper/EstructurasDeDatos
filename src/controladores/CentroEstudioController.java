@@ -13,9 +13,9 @@ public class CentroEstudioController
 		this.dao = new CentroDeEstudioDAO();		
 	}
 
-	public void createDto(int codigoCentroEstudio, int codigoMatricula, int codigoGrupoAutobuses, String nombre, String direccion )
+	public void createDto(int codigoCentroEstudio, String nombre, String direccion )
 	{
-		dto = new CentroDeEstudioDTO(codigoCentroEstudio, codigoMatricula, codigoGrupoAutobuses, nombre, direccion);
+		dto = new CentroDeEstudioDTO(codigoCentroEstudio, nombre, direccion);
 	}
 	
 	public void createDtoId(int codigoCentroEstudio)	

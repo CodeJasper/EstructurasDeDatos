@@ -360,8 +360,6 @@ public class MainInterface extends JFrame implements ActionListener {
 				dataTable.getColumnModel().getColumn(0).setPreferredWidth(110);
 				dataTable.getColumnModel().getColumn(1).setPreferredWidth(128);
 				dataTable.getColumnModel().getColumn(2).setPreferredWidth(123);
-				dataTable.getColumnModel().getColumn(3).setPreferredWidth(61);
-				dataTable.getColumnModel().getColumn(4).setPreferredWidth(110);
 				scrollPane.setViewportView(dataTable);
 		}
 		else if( event.getSource() == estudianteButton ) {
@@ -401,8 +399,7 @@ public class MainInterface extends JFrame implements ActionListener {
 				dataTable.getColumnModel().getColumn(2).setPreferredWidth(123);
 				dataTable.getColumnModel().getColumn(3).setPreferredWidth(61);
 				dataTable.getColumnModel().getColumn(4).setPreferredWidth(80);
-				dataTable.getColumnModel().getColumn(5).setPreferredWidth(80);
-				dataTable.getColumnModel().getColumn(6).setPreferredWidth(80);
+
 				scrollPane.setViewportView(dataTable);
 		}
 		else if( event.getSource() == grupoAutobusesButton ) {

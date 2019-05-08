@@ -106,7 +106,7 @@ public class MainInterface extends JFrame implements ActionListener {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
-		setTitle("Gestor de informacion");
+		setTitle("Gestor de informacion test");
 		setBounds(100, 100, 1090, 539);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		getContentPane().setLayout(null);
@@ -114,7 +114,7 @@ public class MainInterface extends JFrame implements ActionListener {
 		menuBar = new JMenuBar();
 		setJMenuBar(menuBar);		
 				
-		Image img= new ImageIcon("/home/jssv/Escritorio/WorkSpaceTemp/proyectoEstructurasDeDatos/data/img/bus.png.jpg").getImage();
+		Image img= new ImageIcon("./data/img/bus.png.jpg").getImage();
 		ImageIcon img2=new ImageIcon(img.getScaledInstance(950,700, Image.SCALE_SMOOTH));
 		
 		dataTable = new JTable();

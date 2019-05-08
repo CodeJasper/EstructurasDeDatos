@@ -1,0 +1,15 @@
+=curl -fsSL https://get.docker.com -o get-docker.sh
+
+=sh get-docker.sh
+
+=sudo usermod -aG docker $USER (USER EN MAYUS CREO)
+
+=docker pull postgres
+=docker images
+=docker run --name nombre -p 5432:5432 -e POSTGRES_PASSWORD=postgres -v $(pwd)opt/dbP:/var/lib/postgresql/data -d postgres
+
+docker run --name pgadmin4 -p 80:80 -e "PGADMIN_DEFAULT_EMAIL=admin@maible.co" -e "PGADMIN_DEFAULT_PASSWORD=postgres" -d dpage/pgadmin4
+
+docker start postgres
+docker start pgadmin4
+

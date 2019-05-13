@@ -5,6 +5,7 @@
 =git status
 =git commit -a
 =git push https://github.com/codejasper/estructurasdedatos.git
+---------------------------------------------------------------------
 
 =curl -fsSL https://get.docker.com -o get-docker.sh
 
@@ -20,4 +21,11 @@ docker run --name pgadmin4 -p 80:80 -e "PGADMIN_DEFAULT_EMAIL=admin@maible.co" -
 
 docker start postgres
 docker start pgadmin4
+--------------------------------------------------------------------------------------------------------------------------------
 
+=dpkg -l | grep postgres
+=sudo apt-get --purge remove postgresql-x.x postgresql-client-x.x postgresql-client-common postgresql-common postgresql-contrib postgresql-contrib-x.x
+-----------------------------------------------------------------
+
+=docker volume ls
+=docker volume prune

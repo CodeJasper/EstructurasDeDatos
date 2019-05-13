@@ -1,3 +1,11 @@
+=git clone https://github.com/codejasper/estructurasdedatos.git
+=se modifica
+=git status
+=git add .
+=git status
+=git commit -a
+=git push https://github.com/codejasper/estructurasdedatos.git
+
 =curl -fsSL https://get.docker.com -o get-docker.sh
 
 =sh get-docker.sh
